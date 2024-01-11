@@ -1,1 +1,2 @@
-print("hello")
+x = ("namaste niraj")
+print(x[0])
