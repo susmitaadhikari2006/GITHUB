@@ -17,12 +17,12 @@ def getPass(datas):
 
 # Closing file
 invalidInput = False
-special_characters = "!@#$%^&*()-+?_=,<>/ "
+special_characters = "!@#$%^&*()-+?_=,<>/ ."
 Numbers = "1234567890"
 letters = "qwertyuiopasdfghjklzxcvbnm"
 #method to check password in the password
-print(getUser(data))
-print(getPass(data))
+getUser(data)
+getPass(data)
 
 def checkPass(str):
     # if password contains a special character returns true
@@ -40,7 +40,12 @@ while((not invalidInput)  and (n<5)):
         print("Username or Password not formated correctly, Try Again:")
         invalidInput = False
     else:
-        invalidInput = True 
+        for i in range(0, len(data)):
+            if ((getUser(data)[i] == username) and (getPass(data)[i]== password)):   
+                invalidInput = True 
+                break
+            else:
+                invalidInput = False 
     n +=1
     if (n<=4):
         print("you used " +str(n) + " of 5 attempts")
