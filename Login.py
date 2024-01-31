@@ -11,12 +11,9 @@ def getUser(datas):
         users.append(i)
     return users
 def getPass(datas):
-    for i in datas["password"]:
-        passWrd.append(i)
+    for b in datas["password"]:
+        passWrd.append(b)
     return passWrd
-
-print(users)
-print(passWrd)
 
 # Closing file
 invalidInput = False
@@ -25,6 +22,8 @@ Numbers = "1234567890"
 letters = "qwertyuiopasdfghjklzxcvbnm"
 #method to check password in the password
 print(getUser(data))
+print(getPass(data))
+
 def checkPass(str):
     # if password contains a special character returns true
     if (any(c in special_characters for c in str) and any(a in Numbers for a in str) and any(b in letters for b in str) and any(d in letters.upper() for d in str)):
