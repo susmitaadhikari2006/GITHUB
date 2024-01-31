@@ -1,6 +1,12 @@
-[
-    {
-        "usernames": ["user1", "user2", "user3", "user4", "user5"],
-        "passwords":["Hello1A.", "Hello1A.", "Hello1A.", "Hello1A.", "Hello1A."]
-    }
-]
+{
+    "userDetails":[
+        {
+            "username": "user1",
+            "password": "Apple1."
+        },
+        {
+            "username": "user2",
+            "password": "Apple1!"  
+        }
+    ]
+}
