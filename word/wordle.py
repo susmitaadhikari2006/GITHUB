@@ -19,5 +19,5 @@ while((not invalidWord) and (i<10)):
     if (any(c in Secret_word for c in wordUser)):
         print("this letter is in the word!")
     else:
-        print("UR AN IDIOT, TRY AGAIN!")
+        print("YOUR AN IDIOT, TRY AGAIN!")
     i+=1
