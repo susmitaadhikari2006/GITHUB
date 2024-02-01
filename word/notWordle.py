@@ -10,13 +10,12 @@ def get_guess():
         if(len(letter)>1 or (not any(b in letters for b in letter))):
             invalidInput = False
             print("you entered more then one letter or a number, Try Again")
+            i+=1
         else:
             invalidInput = True
-        i+=1
     return letter
 
-invalidWord= False
-while((not invalidWord) and (i<10)):
+while((i<10)):
     wordUser = get_guess()
     if (any(c in Secret_word for c in wordUser)):
         print("this letter is in the word!")
