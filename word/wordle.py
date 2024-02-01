@@ -2,11 +2,12 @@ Secret_word = "happy"
 
 def get_guess():
     invalidInput = False
+    letters = "qwertyuiopasdfghjklzxcvbnm"
     while((not invalidInput)):
         letter = input("Enter your word(enter a letter):").lower() #not case specific
-        if(len(letter)>1):
+        if(len(letter)>1 or (not any(b in letters for b in letter))):
             invalidInput = False
-            print("you entered more then one letter, Try Again")
+            print("you entered more then one letter or a number, Try Again")
         else:
             invalidInput = True
     return letter
