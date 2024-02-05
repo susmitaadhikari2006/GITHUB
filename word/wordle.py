@@ -1,3 +1,6 @@
+from colorama import Fore
+import random
+
 Secret_word = "software"
 i=0
 dashes = ""
