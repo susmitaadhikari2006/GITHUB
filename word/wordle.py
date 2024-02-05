@@ -1,3 +1,6 @@
+from colorama import Fore
+import random
+
 Secret_word = "software"
 i=0
 dashes = ""
@@ -34,7 +37,6 @@ while((i<10)):
         print(update_dashes(Secret_word, guessed_letters))
     else:
         print("YOUR AN IDIOT, TRY AGAIN!")
-        guessed_letters.add(wordUser)
         print(update_dashes(Secret_word, guessed_letters))
     i+=1
     if i==10:
