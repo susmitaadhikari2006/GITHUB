@@ -11,7 +11,7 @@ for x in open("words.txt", "r"):
     wordList.append(x.strip())
 word = wordList[random.randint(0,583)]
 guess = ['hello','hello','hello','hello','hello']
-print(word)
+#print(word)
 count = 0
 colors = [["white","white","white","white","white"],
           ["white","white","white","white","white"],
