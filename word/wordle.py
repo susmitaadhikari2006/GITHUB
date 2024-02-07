@@ -21,7 +21,7 @@ def get_guess():
     invalidInput = False
     global guesses_left
     letters = "qwertyuiopasdfghjklzxcvbnm"
-    while((not invalidInput) and (not guesses_left==0)):
+    while((not invalidInput) and (guesses_left>0)):
         letter = input("Guess:").lower() #not case specific
         if(len(letter)>1 or (not any(b in letters for b in letter))):
             invalidInput = False
@@ -42,13 +42,16 @@ while((rightword) and (guesses_left>0)):
         dashes = update_dashes(Secret_word, guessed_letters)
         print(dashes)
         if(dashes == Secret_word):
-            rightword = False   
+            rightword = False  
+        print(str(guesses_left) + " incorrect guesses left.")
+
     else:
-        print("YOUR AN IDIOT, TRY AGAIN!")
-        guesses_left -= 1
-        print(update_dashes(Secret_word, guessed_letters))
-    print(str(guesses_left) + " incorrect guesses left.")
-if(guesses_left == 0):
+        if(guesses_left>0):
+            print("YOUR AN IDIOT, TRY AGAIN!")
+            guesses_left -= 1
+            print(update_dashes(Secret_word, guessed_letters))
+            print(str(guesses_left) + " incorrect guesses left.")
+if(guesses_left <= 0):
     print("you lost The word was: "+ Secret_word)
 else:
     print("Congrats! You win. The word was: " + Secret_word)
