@@ -1,12 +1,10 @@
 from colorama import Fore
 import random
-import os
 
 wordList = []
 for x in open("words.txt", "r"):
     wordList.append(x.strip())
 Secret_word = wordList[random.randint(0,5753)]
-print(Secret_word)
 dashes = ""
 guesses_left = 10
 
@@ -23,7 +21,7 @@ def get_guess():
     invalidInput = False
     global guesses_left
     letters = "qwertyuiopasdfghjklzxcvbnm"
-    while((not invalidInput) or (guesses_left>0)):
+    while((not invalidInput) and (not guesses_left==0)):
         letter = input("Guess:").lower() #not case specific
         if(len(letter)>1 or (not any(b in letters for b in letter))):
             invalidInput = False
@@ -50,7 +48,6 @@ while((rightword) and (guesses_left>0)):
         guesses_left -= 1
         print(update_dashes(Secret_word, guessed_letters))
     print(str(guesses_left) + " incorrect guesses left.")
-
 if(guesses_left == 0):
     print("you lost The word was: "+ Secret_word)
 else:
