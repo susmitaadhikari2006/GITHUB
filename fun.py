@@ -1,4 +1,3 @@
-#There are 584 lines in the file
 import random
 import os
 from colorama import Fore
@@ -9,9 +8,11 @@ from colorama import Fore
 wordList = []
 for x in open("words.txt", "r"):
     wordList.append(x.strip())
-word = wordList[random.randint(0,583)]
-guess = ['hello','hello','hello','hello','hello']
-#print(word)
+#word = wordList[random.randint(0,583)]
+word = "glide"
+copy = word
+guess = ['-----','-----','-----','-----','-----']
+print(word)
 count = 0
 colors = [["white","white","white","white","white"],
           ["white","white","white","white","white"],
@@ -19,6 +20,7 @@ colors = [["white","white","white","white","white"],
           ["white","white","white","white","white"],
           ["white","white","white","white","white"]]
 while count <= 5:
+    copy = word
     guess[count] = input("Guess a 5-letter word\n")
     if len(guess[count]) != 5:
         print("Please enter a 5-letter word.")
@@ -28,9 +30,9 @@ while count <= 5:
         continue
     
 # Doesn't work because the wordlist is that great
-  # if not guess[count] in wordList:
-  #      print("Please enter a real word.")
-  #     continue
+    #if not guess[count] in wordList:
+     #   print("Please enter a real word.")
+      #  continue
         
 
     #Win State
@@ -44,13 +46,16 @@ while count <= 5:
 
     # Guesses
     for i in range(0, 5):
-        if guess[count][i] == word[i]:
+        if guess[count][i] == copy[i]:
             colors[count][i] = "green"
         else:
             for j in range(0, 5):
-                if guess[count][j] == word[i] and colors[count][j] != "green":
+                if guess[count][j] == copy[i] and i!=j and colors[count][j] != "green":
+                    copy_list = list(copy)
+                    copy_list[j] = '-'
+                    print(copy)
+                    copy = "".join(copy_list)
                     colors[count][j] = "yellow"
-                    break 
 
     os.system('cls||clear')
     for i in range(0,count+1):
@@ -66,6 +71,7 @@ while count <= 5:
             loc += 1  
         print(Fore.WHITE) 
         print()
+        print(copy)
 
     count += 1
 

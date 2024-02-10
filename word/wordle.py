@@ -23,11 +23,9 @@ def get_guess():
     letters = "qwertyuiopasdfghjklzxcvbnm"
     while((not invalidInput) and (guesses_left>0)):
         letter = input("Guess:").lower() #not case specific
-        if(len(letter)>1 or (not any(b in letters for b in letter))):
+        if(not len(letter)==5 or not letter.isalpha()):
             invalidInput = False
-            print("you entered more then one letter or a number, Try Again")
-            guesses_left -= 1
-            print(str(guesses_left) + " incorrect guesses left.")
+            print("Invalid Input, Please enter a 5 LETTER word")
         else:
             invalidInput = True
     return letter
