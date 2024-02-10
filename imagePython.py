@@ -26,10 +26,13 @@ while True:
         height = h
         area = width * height
         ratio = w/h
-        if((ratio < 4.21) and (ratio > 2.0)):
+        if((height >= width*2) and (area > 2000)):
             cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
             cv2.putText(frame, f'Width: {width}, Height: {height}, Area: {area}', (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
-        
+        if((width >= height*2) and (area > 2000)):
+            cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
+            cv2.putText(frame, f'Width: {width}, Height: {height}, Area: {area}', (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
+
     cv2.imshow('FRC Image Processing', frame)
 
     if cv2.waitKey(1) == ord('q'):
