@@ -8,15 +8,23 @@ while True:
     width = int(cam.get(3))
     height = int(cam.get(4))
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+    
+    # Define range of orange color in HSV
     lower_orange = numpy.array([0, 102, 204])
     upper_orange = numpy.array([20, 255, 255])
-        
+    
+    # Threshold the HSV image to get only orange colors
     mask = cv2.inRange(hsv, lower_orange, upper_orange)
     
-    result = cv2.bitwise_and(frame, frame, mask=mask)
-    # frame = cv2.flip(-1)
+    # Find contours in the mask
+    contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     
-    cv2.imshow('FRC Image Processing', result)
+    # Draw bounding rectangles around detected orange items
+    for contour in contours:
+        x, y, w, h = cv2.boundingRect(contour)
+        cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
+    
+    cv2.imshow('FRC Image Processing', frame)
 
     if cv2.waitKey(1) == ord('q'):
         break
