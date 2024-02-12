@@ -24,7 +24,7 @@ def get_guess():
 
 def update_dashes(hidden_text, guessed_word):
     # dashes = "".join(x if x.lower() in guessed_word else "-" for x in hidden_text)
-    # guess[count] = guessed_word
+    guess[count] = guessed_word
     return guessed_word
 
 rightword = True
