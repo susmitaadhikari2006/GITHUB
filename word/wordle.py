@@ -1,55 +1,41 @@
-from colorama import Fore
 import random
+import os
+from colorama import Fore
 
 wordList = []
 for x in open("words.txt", "r"):
     wordList.append(x.strip())
 Secret_word = wordList[random.randint(0,5753)]
-dashes = ""
-guesses_left = 10
-
-# putting in dashes for each letter
-for g in Secret_word:
-    dashes += "-"
-
-print(dashes)
-def update_dashes(hidden_text, guessed_letters):
-    dashes = "".join(x if x.lower() in guessed_letters else "-" for x in hidden_text)
-    return dashes
-        
+print(Secret_word)
+dashes = Secret_word
+guesses_left = 5
+    
 def get_guess():
     invalidInput = False
     global guesses_left
-    letters = "qwertyuiopasdfghjklzxcvbnm"
     while((not invalidInput) and (guesses_left>0)):
         letter = input("Guess:").lower() #not case specific
-        if(not len(letter)==5 or not letter.isalpha()):
+        if(not len(letter)==5 or not letter.isalpha() or not letter in wordList):
             invalidInput = False
             print("Invalid Input, Please enter a 5 LETTER word")
         else:
             invalidInput = True
     return letter
 
-guessed_letters = {""}
+def update_dashes(hidden_text, guessed_word):
+    # dashes = "".join(x if x.lower() in guessed_word else "-" for x in hidden_text)
+    # guess[count] = guessed_word
+    return guessed_word
+
 rightword = True
+attempts = 0
 while((rightword) and (guesses_left>0)):
     wordUser = get_guess()
-    if (any(c in Secret_word for c in wordUser)):
-        print("this letter is in the word!\n")
-        guessed_letters.add(wordUser)
-        dashes = update_dashes(Secret_word, guessed_letters)
-        print(dashes)
-        if(dashes == Secret_word):
-            rightword = False  
-        print(str(guesses_left) + " incorrect guesses left.")
-
-    else:
-        if(guesses_left>0):
-            print("YOUR AN IDIOT, TRY AGAIN!")
-            guesses_left -= 1
-            print(update_dashes(Secret_word, guessed_letters))
-            print(str(guesses_left) + " incorrect guesses left.")
-if(guesses_left <= 0):
-    print("you lost The word was: "+ Secret_word)
-else:
-    print("Congrats! You win. The word was: " + Secret_word)
+    attempts =+ 1
+    dashes = update_dashes(Secret_word, wordUser)
+    print(str(attempts) + ". " + dashes)
+    if(dashes == Secret_word):
+        rightword = False
+    elif(guesses_left==0):
+        rightword = False
+    guesses_left -= 1
