@@ -17,7 +17,7 @@ def get_guess():
         letter = input("Guess:").lower() #not case specific
         if(not len(letter)==5 or not letter.isalpha() or not letter in wordList):
             invalidInput = False
-            print("Invalid Input, Please enter a 5 LETTER word")
+            print("Invalid Input, Please enter a 5 LETTER WORD")
         else:
             invalidInput = True
     return letter
