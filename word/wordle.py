@@ -1,6 +1,7 @@
 import random
 import os
 from colorama import Fore, Style
+print("\nYou have 6 sttempts best of luck:")
 
 wordList = []
 for x in open("words.txt", "r"):
@@ -15,7 +16,7 @@ def get_guess():
         letter = input("Guess:").lower() #not case specific
         if(not len(letter)==5 or not letter.isalpha() or not letter in wordList):
             invalidInput = False
-            print("Invalid Input, Please enter a 5 LETTER word, that is in the word list")
+            print("not in the word list")
         else:
             invalidInput = True
     return letter
@@ -45,4 +46,4 @@ while((rightword) and (guesses_left>0)):
     print(str(attempts) + ". " + dashes)
 
 if guesses_left == 0:
-    print("word was: " + Secret_word)
+    print("word was: " + Fore.GREEN + Secret_word + Style.RESET_ALL)
