@@ -8,7 +8,6 @@ for x in open("words.txt", "r"):
     wordList.append(x.strip())
 Secret_word = wordList[random.randint(0,5753)]
 guesses_left = 6
-Secret_word = "glide"
     
 def get_guess():
     invalidInput = False
