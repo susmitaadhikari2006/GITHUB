@@ -8,6 +8,7 @@ for x in open("words.txt", "r"):
     wordList.append(x.strip())
 Secret_word = wordList[random.randint(0,5753)]
 guesses_left = 6
+Secret_word = "glide"
     
 def get_guess():
     invalidInput = False
@@ -23,25 +24,32 @@ def get_guess():
 
 def update_dashes(hidden_text, guessed_word):
     word = ""
-    for i in range(len(hidden_text)):
-        if guessed_word[i] == hidden_text[i]:
+    Secret = hidden_text
+    string_list = list(Secret)
+    for i in range(len(Secret)):
+        if guessed_word[i] == Secret[i]:
             word += Fore.GREEN + guessed_word[i] + Style.RESET_ALL
-        elif guessed_word[i] in hidden_text:
+            idx = Secret.index(guessed_word[i])
+            string_list[idx] = "!"
+            Secret = ''.join(string_list)
+        elif guessed_word[i] in Secret:
             word += Fore.YELLOW + guessed_word[i] + Style.RESET_ALL
+            idx = Secret.index(guessed_word[i])
+            string_list[idx] = "!"
+            Secret = ''.join(string_list)
         else:
             word += guessed_word[i]
     return word
 
 rightword = True
 attempts = 0
-while((rightword) and (guesses_left>0)):
+while((rightword) and guesses_left > 0):
     wordUser = get_guess()
-    guesses_left -= 1
     attempts += 1
     if(wordUser == Secret_word):
         rightword = False
     if(guesses_left==0):
-        rightword = False
+        rightword = True
     dashes = update_dashes(Secret_word, wordUser)
     print(str(attempts) + ". " + dashes)
 
