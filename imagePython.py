@@ -1,6 +1,14 @@
 import cv2
 import numpy
 
+def draw_vertical_line(image):
+    height, width, _ = image.shape
+    # Calculate the coordinates for the middle of the screen
+    middle_x = width // 2
+    # Draw the vertical line
+    cv2.line(image, (middle_x, 0), (middle_x, height), (0, 0, 255), 2)
+    
+    
 cam = cv2.VideoCapture(0)
 
 while True:
@@ -18,6 +26,8 @@ while True:
     
     # Find contours in the mask
     contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    draw_vertical_line(frame)
+    
     
     # Draw bounding rectangles around detected orange items
     for contour in contours:
@@ -26,10 +36,7 @@ while True:
         height = h
         area = width * height
         ratio = w/h
-        if((height >= width*2) and (area > 2000)):
-            cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
-            cv2.putText(frame, f'Width: {width}, Height: {height}, Area: {area}', (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
-        if((width >= height*2) and (area > 2000)):
+        if((width >= height*2) and (area > 3000)):
             cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
             cv2.putText(frame, f'Width: {width}, Height: {height}, Area: {area}', (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
 
