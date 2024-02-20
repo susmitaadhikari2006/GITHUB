@@ -42,13 +42,14 @@ def update_dashes(hidden_text, guessed_word):
 
 rightword = True
 attempts = 0
-while((rightword) and guesses_left > 0):
+while((rightword) and (guesses_left > 0)):
     wordUser = get_guess()
     attempts += 1
+    guesses_left -=1
     if(wordUser == Secret_word):
         rightword = False
-    if(guesses_left==0):
-        rightword = True
+    if(guesses_left==6):
+        rightword = False
     dashes = update_dashes(Secret_word, wordUser)
     print(str(attempts) + ". " + dashes)
 
