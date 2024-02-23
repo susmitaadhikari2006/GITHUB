@@ -39,4 +39,3 @@ while(not invalidInput):
             writer.writerows(rows)#updating the csv with the data in rows
         invalidInput = True
 print(rows)
-        
