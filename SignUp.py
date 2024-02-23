@@ -23,17 +23,17 @@ type(file)
 csvreader = csv.reader(file)
 for row in csvreader: #this is appending to the rows array form the csvFile
     rows.append(row)
-username = []
+usernames = []
+users = []
 for r in rows:
     for j in r:
-        username.append(j)
-print(j)   
-print(username)
+        usernames.append(j) 
+print(usernames)
 while(not invalidInput):
     username = input("Enter your username:").lower()#username is not case specific
     password = input("Enter your password:")
     
-    if(username.__contains__(" ") or not checkPass(password)):# does the username contains spaces, If so -> LOOP
+    if(username.__contains__(" ") or not checkPass(password) or username in users):# does the username contains spaces, If so -> LOOP
         print("Username or Password not formated correctly, Try Again:")
         invalidInput = False
     else:
