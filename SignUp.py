@@ -32,7 +32,8 @@ while(not invalidInput):
         print("Username or Password not formated correctly, Try Again:")
         invalidInput = False
     else:
-        info = [username +","+password]
+        info = []
+        info.append(username +","+password)
         rows.append(info) # adding the new username and password to the rows array, to use later
         with open('user.csv', 'w', newline='') as csvfile:
             writer = csv.writer(csvfile)
