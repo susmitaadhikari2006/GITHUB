@@ -23,7 +23,12 @@ type(file)
 csvreader = csv.reader(file)
 for row in csvreader: #this is appending to the rows array form the csvFile
     rows.append(row)
-
+username = []
+for r in rows:
+    for j in r:
+        username.append(j)
+print(j)   
+print(username)
 while(not invalidInput):
     username = input("Enter your username:").lower()#username is not case specific
     password = input("Enter your password:")
@@ -32,9 +37,8 @@ while(not invalidInput):
         print("Username or Password not formated correctly, Try Again:")
         invalidInput = False
     else:
-        info = []
-        info.append(username +","+password)
-        rows.append(info) # adding the new username and password to the rows array, to use later
+        info=(username +","+password)
+        rows.append(info.split(",")) # adding the new username and password to the rows array, to use later
         with open('user.csv', 'w', newline='') as csvfile:
             writer = csv.writer(csvfile)
             writer.writerows(rows)#updating the csv with the data in rows
