@@ -5,8 +5,6 @@ special_characters = "!@#$%^&*()-+?_=,<>/ ."
 Numbers = "1234567890"
 letters = "qwertyuiopasdfghjklzxcvbnm"
 
-#csv open and adding to a list
-
 def checkPass(str):
     # if password contains a special character returns true
     if (any(c in special_characters for c in str) and any(a in Numbers for a in str) and any(b in letters for b in str) and any(d in letters.upper() for d in str) and (len(str)>=8)):
@@ -15,6 +13,7 @@ def checkPass(str):
         return False
 #runs untill correct input is entered
 #assumes incorrect input at first
+
 n = 0
 rows = []
 file = open('user.csv')
@@ -43,4 +42,3 @@ while(not invalidInput):
             writer = csv.writer(csvfile)
             writer.writerows(rows)#updating the csv with the data in rows
         invalidInput = True
-print(rows)
