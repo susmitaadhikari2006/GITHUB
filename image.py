@@ -8,8 +8,6 @@ def draw_vertical_line(image):
     # Draw the vertical line
     cv2.line(image, (middle_x, 0), (middle_x, height), (0, 0, 255), 2)
     return middle_x
-    
-    
 cam = cv2.VideoCapture(0)
 
 while True:
@@ -42,7 +40,7 @@ while True:
         height_s, width_s, _ = frame.shape
         if((width >= height*2) and (area > 3000)):
             cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
-            cv2.putText(frame, f'Width: {width}, Height: {height}, Area: {area}', (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
+            cv2.putText(frame, f'Width: {width}, Height: {height}, Area: {area}, {x}, new {position_ox}', (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
 
             # Draw a circle at the centroid
             cv2.circle(frame, (x, y), 7, (255, 0, 0), -1)
