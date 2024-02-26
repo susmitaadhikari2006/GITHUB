@@ -1,5 +1,4 @@
 import csv
-import pandas as pd
 
 invalidInput = False
 special_characters = "!@#$%^&*()-+?_=,<>/ ."
@@ -10,7 +9,7 @@ letters = "qwertyuiopasdfghjklzxcvbnm"
 
 def checkPass(str):
     # if password contains a special character returns true
-    if (any(c in special_characters for c in str) and any(a in Numbers for a in str) and any(b in letters for b in str) and any(d in letters.upper() for d in str)):
+    if (any(c in special_characters for c in str) and any(a in Numbers for a in str) and any(b in letters for b in str) and any(d in letters.upper() for d in str) and (len(str)>=8)):
         return True
     else: 
         return False
@@ -21,20 +20,21 @@ rows = []
 file = open('user.csv')
 type(file)
 csvreader = csv.reader(file)
+usernames = []
 for row in csvreader: #this is appending to the rows array form the csvFile
     rows.append(row)
-usernames = []
-users = []
-for r in rows:
-    for j in r:
-        usernames.append(j) 
-print(usernames)
+for h in rows:
+    usernames.append(h[0])
+    
 while(not invalidInput):
     username = input("Enter your username:").lower()#username is not case specific
     password = input("Enter your password:")
     
-    if(username.__contains__(" ") or not checkPass(password) or username in users):# does the username contains spaces, If so -> LOOP
+    if(username.__contains__(" ") or not checkPass(password)):# does the username contains spaces, If so -> LOOP
         print("Username or Password not formated correctly, Try Again:")
+        invalidInput = False
+    elif(username in usernames):
+        print("Username Already Exists")
         invalidInput = False
     else:
         info=(username +","+password)
