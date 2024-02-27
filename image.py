@@ -25,7 +25,7 @@ while True:
     
     # Find contours in the mask
     contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-    draw_vertical_line(frame)
+    middle = draw_vertical_line(frame)
     
     
     # Draw bounding rectangles around detected orange items
@@ -38,12 +38,12 @@ while True:
         position_ox = x + (w/2)
         position_oy = y + (h/2)
         height_s, width_s, _ = frame.shape
-        if((width >= height*2) and (area > 3000)):
+        if((width >= height*2) and (area > 2500)):
             cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
             cv2.putText(frame, f'Width: {width}, Height: {height}, Area: {area}, {x}, new {position_ox}', (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
 
             # Draw a circle at the centroid
-            cv2.circle(frame, (x, y), 7, (255, 0, 0), -1)
+            cv2.circle(frame, (x+int(w/2), y), 7, (255, 0, 0), -1)
                 
              # Calculate distance between the two points (center of screen and centroid)
             distance = numpy.sqrt((height_s - width_s // 2) ** 2 + (width_s - height // 2) ** 2)
