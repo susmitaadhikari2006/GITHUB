@@ -1,6 +1,11 @@
 import cv2
 import numpy
 
+
+NoteWidthInches = 14
+NoteWidthMeters = NoteWidthInches * 0.0254
+focal_length = 930
+
 def draw_vertical_line(image):
     height, width, _ = image.shape
     # Calculate the coordinates for the middle of the screen
@@ -9,6 +14,14 @@ def draw_vertical_line(image):
     cv2.line(image, (middle_x, 0), (middle_x, height), (0, 0, 255), 2)
     return middle_x
 cam = cv2.VideoCapture(0)
+def estimate_distance(object_width_pixels):
+    """
+    Estimates distance of detected objects based on the width of the detected object (in pixels)
+    """
+    # Estimate distance using the formula: distance = (focal_length * real_object_width) / object_width_pixels
+    # Returns: meters
+    distance = (focal_length * NoteWidthMeters) / object_width_pixels
+    return distance
 
 while True:
     ret, frame = cam.read()
@@ -35,8 +48,7 @@ while True:
         height = h
         area = width * height
         ratio = w/h
-        position_ox = x + (w/2)
-        position_oy = y + (h/2)
+        position_ox = x + (w/2) 
         height_s, width_s, _ = frame.shape
         if((width >= height*2) and (area > 2500)):
             cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
@@ -44,9 +56,7 @@ while True:
 
             # Draw a circle at the centroid
             cv2.circle(frame, (x+int(w/2), y), 7, (255, 0, 0), -1)
-                
-             # Calculate distance between the two points (center of screen and centroid)
-            distance = numpy.sqrt((height_s - width_s // 2) ** 2 + (width_s - height // 2) ** 2)
+            distance = estimate_distance(width)
     cv2.imshow('FRC Image Processing', frame)
 
     if cv2.waitKey(1) == ord('q'):
