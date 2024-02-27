@@ -38,9 +38,8 @@ while True:
     
     # Find contours in the mask
     contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-    middle = draw_vertical_line(frame)
-    
-    
+    middle = draw_vertical_line(frame)#middle of the entire frame
+     
     # Draw bounding rectangles around detected orange items
     for contour in contours:
         x, y, w, h = cv2.boundingRect(contour)
@@ -51,12 +50,12 @@ while True:
         position_ox = x + (w/2) 
         height_s, width_s, _ = frame.shape
         if((width >= height*2) and (area > 2500)):
+            distance = estimate_distance(width)
             cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
             cv2.putText(frame, f'Width: {width}, Height: {height}, Area: {area}, {x}, new {position_ox}', (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
 
             # Draw a circle at the centroid
             cv2.circle(frame, (x+int(w/2), y), 7, (255, 0, 0), -1)
-            distance = estimate_distance(width)
     cv2.imshow('FRC Image Processing', frame)
 
     if cv2.waitKey(1) == ord('q'):
