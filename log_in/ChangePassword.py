@@ -28,9 +28,8 @@ while((invalidInput) and (n<5)):
     print("LOGIN:\n")
     username = input("Enter your username:").lower()#username is not case specific
     password = input("Enter your password:")
-    for i in range(len(usernames)):
+    for i in range(len(rows)):
         if (usernames[i]==username) and (passwords[i]== password):  
-            print("correct Input")
             invalidInput = False
         else:
             invalidInput = True 
