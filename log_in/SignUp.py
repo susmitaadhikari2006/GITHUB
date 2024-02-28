@@ -13,8 +13,6 @@ def checkPass(str):
         return False
 #runs untill correct input is entered
 #assumes incorrect input at first
-
-n = 0
 rows = []
 file = open('user.csv')
 type(file)
@@ -24,7 +22,7 @@ for row in csvreader: #this is appending to the rows array form the csvFile
     rows.append(row)
 for h in rows:
     usernames.append(h[0])
-    
+
 while(not invalidInput):
     username = input("Enter your username:").lower()#username is not case specific
     password = input("Enter your password:")
