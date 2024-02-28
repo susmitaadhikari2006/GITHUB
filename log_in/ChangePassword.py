@@ -1,4 +1,3 @@
-import json
 import csv
 special_characters = "!@#$%^&*()-+?_=,<>/ ."
 Numbers = "1234567890"
@@ -8,12 +7,13 @@ file = open('user.csv')
 type(file)
 csvreader = csv.reader(file)
 usernames = []
-Passwords = []
+passwords = []
 for row in csvreader: #this is appending to the rows array form the csvFile
     rows.append(row)#returns a 2d array of (username,password)
 for h in rows:
     usernames.append(h[0])#making a list of usernames
-    Passwords.append(h[1])#making a list of passwords
+    passwords.append(h[1])#making a list of passwords
+print(usernames)
 
 def checkPass(str):
     # if password contains a special character returns true
@@ -24,16 +24,18 @@ def checkPass(str):
 #assumes incorrect input at first
 n = 0
 invalidInput = True
-while((invalidInput)  and (n<5)):
+while((invalidInput) and (n<5)):
+    print("LOGIN:\n")
     username = input("Enter your username:").lower()#username is not case specific
     password = input("Enter your password:")
-    for i in range(0, len(rows)):
-        if ((usernames[i] == username) and (password[i]== password)):   
-            invalidInput = True
+    for i in range(len(usernames)):
+        if (usernames[i]==username) and (passwords[i]== password):  
+            print("correct Input")
+            invalidInput = False
         else:
-            invalidInput = False 
+            invalidInput = True 
     n +=1
     if (n<=4):
         print("you used " +str(n) + " of 5 attempts")
     if(n==5):
-        print("\n you have used all attempts! Please contact our customer service department for help at: \n 000-000-0000")
+        print("you have used all attempts! Please contact our customer service department for help at: \n 000-000-0000")
