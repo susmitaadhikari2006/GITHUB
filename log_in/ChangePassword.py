@@ -43,4 +43,5 @@ while((invalidInput) and (n<5)):
         print("you have used all attempts! Please contact our customer service department for help at: \n 000-000-0000")
 while(changePass):
     change = input("do you want to change your password? y/n: ").lower # the 'y' or 'n' is not case specific
+    #depening on the choice the user makes run the change password code 
     
