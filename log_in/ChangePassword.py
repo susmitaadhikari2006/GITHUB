@@ -24,6 +24,7 @@ def checkPass(str):
 #assumes incorrect input at first
 n = 0
 invalidInput = True
+changePass = False # false untill they sign in
 while((invalidInput) and (n<5)):
     print("LOGIN:\n")
     username = input("Enter your username:").lower()#username is not case specific
@@ -31,6 +32,8 @@ while((invalidInput) and (n<5)):
     for i in range(len(rows)):
         if ((usernames[i]==username) and (passwords[i]== password)):  
             invalidInput = False
+            changePass = True
+            break
         else:
             invalidInput = True 
     n +=1
