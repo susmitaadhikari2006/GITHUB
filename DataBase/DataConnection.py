@@ -1,4 +1,3 @@
 import pyodbc as PyData
 
-conn = PyData.connect('DRIVER={driver_name});
-print(str(data.getinfo))
+cnxn = PyData.connect(r"DRIVER={Microsoft Access Driver (*.mdb)};" + \r"C:\Users\PS24Sadhikari\python\GITHUB\DataBase\eccLABS.accdb")
