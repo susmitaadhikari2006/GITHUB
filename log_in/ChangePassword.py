@@ -1,7 +1,9 @@
 import csv
+
 special_characters = "!@#$%^&*()-+?_=,<>/ ."
 Numbers = "1234567890"
 letters = "qwertyuiopasdfghjklzxcvbnm"
+indexForNewPass = 0
 rows = []
 file = open('user.csv')
 type(file)
@@ -30,6 +32,7 @@ while((invalidInput) and (n<5)):
     for i in range(len(rows)):
         if ((usernames[i]==username) and (passwords[i]== password)): 
             print("Log In success!") 
+            indexForNewPass = i
             invalidInput = False
             changePass = True
             break
@@ -41,11 +44,17 @@ while((invalidInput) and (n<5)):
     if(n==5):
         print("you have used all attempts! Please contact our customer service department for help at: \n 000-000-0000")
 while(changePass):
-    change = input("do you want to change your password? y/n: ").lower # the 'y' or 'n' is not case specific
+    change = input("do you want to change your password? y/n: ").lower() # the 'y' or 'n' is not case specific
     if(change == "y"):
         oldPass = input("please enter your old password:") # having the user enter their old password
         if(password == oldPass):
-            print("success")
+            newPass = input("please enter your new password:")
+            if(checkPass(newPass)):
+                rows[indexForNewPass][1] = newPass
+                print(rows)
+                with open('user.csv', 'w', newline='') as csvfile:
+                    writer = csv.writer(csvfile)
+                    writer.writerows(rows)#updating the csv with the data in rows
         break
     elif(change == "n"):
         changePass = False
