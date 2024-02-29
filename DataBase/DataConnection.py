@@ -1,3 +1,4 @@
 import pyodbc as PyData
 
-data = PyData.connect(eccLABS.accdb)
+conn = PyData.connect('DRIVER={driver_name});
+print(str(data.getinfo))
