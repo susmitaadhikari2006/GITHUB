@@ -13,7 +13,6 @@ for row in csvreader: #this is appending to the rows array form the csvFile
 for h in rows:
     usernames.append(h[0])#making a list of usernames
     passwords.append(h[1])#making a list of passwords
-print(usernames)
 
 def checkPass(str):
     # if password contains a special character returns true
@@ -43,5 +42,14 @@ while((invalidInput) and (n<5)):
         print("you have used all attempts! Please contact our customer service department for help at: \n 000-000-0000")
 while(changePass):
     change = input("do you want to change your password? y/n: ").lower # the 'y' or 'n' is not case specific
-    #depening on the choice the user makes run the change password code 
+    if(change == "y"):
+        oldPass = input("please enter your old password:") # having the user enter their old password
+        if(password == oldPass):
+            print("success")
+        break
+    elif(change == "n"):
+        changePass = False
+        break
+    else:
+        changePass = True
     
