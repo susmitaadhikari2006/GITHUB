@@ -13,7 +13,6 @@ for row in csvreader: #this is appending to the rows array form the csvFile
 for h in rows:
     usernames.append(h[0])#making a list of usernames
     passwords.append(h[1])#making a list of passwords
-
 def checkPass(str):
     # if password contains a special character returns true
     if (any(c in special_characters for c in str) and any(a in Numbers for a in str) and any(b in letters for b in str) and any(d in letters.upper() for d in str) and (len(str)>=8)):
@@ -29,7 +28,8 @@ while((invalidInput) and (n<5)):
     username = input("Enter your username:").lower()#username is not case specific
     password = input("Enter your password:")
     for i in range(len(rows)):
-        if ((usernames[i]==username) and (passwords[i]== password)):  
+        if ((usernames[i]==username) and (passwords[i]== password)): 
+            print("Log In success!") 
             invalidInput = False
             changePass = True
             break
