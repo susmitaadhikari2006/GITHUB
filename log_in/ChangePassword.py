@@ -24,7 +24,7 @@ def checkPass(str):
 #assumes incorrect input at first
 n = 0
 invalidInput = True
-changePass = False # false untill they sign in
+signin = False # false untill they sign in
 while((invalidInput) and (n<5)):
     print("LOGIN:\n")
     username = input("Enter your username:").lower()#username is not case specific
@@ -34,7 +34,7 @@ while((invalidInput) and (n<5)):
             print("Log In success!") 
             indexForNewPass = i
             invalidInput = False
-            changePass = True
+            signin = True
             break
         else:
             invalidInput = True 
@@ -43,22 +43,22 @@ while((invalidInput) and (n<5)):
         print("you used " +str(n) + " of 5 attempts")
     if(n==5):
         print("you have used all attempts! Please contact our customer service department for help at: \n 000-000-0000")
-while(changePass):
-    change = input("do you want to change your password? y/n: ").lower() # the 'y' or 'n' is not case specific
+while(signin):
+    change = input("do you want to change your password? y/n: \n To sign out enter q: ").lower() # the 'y' or 'n' is not case specific
     if(change == "y"):
         oldPass = input("please enter your old password:") # having the user enter their old password
         if(password == oldPass):
             newPass = input("please enter your new password:")
             if(checkPass(newPass)):
                 rows[indexForNewPass][1] = newPass
-                print(rows)
                 with open('user.csv', 'w', newline='') as csvfile:
                     writer = csv.writer(csvfile)
                     writer.writerows(rows)#updating the csv with the data in rows
-        break
+        signin = True
     elif(change == "n"):
-        changePass = False
-        break
+        signin = True
+    elif(change == "q"):
+        signin = False
     else:
-        changePass = True
+        signin = True
     
