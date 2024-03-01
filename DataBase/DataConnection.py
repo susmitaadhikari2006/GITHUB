@@ -1,3 +1,8 @@
-import pyodbc as PyData
+import pyodbc
 
-cnxn = PyData.connect(r"DRIVER={Microsoft Access Driver (*.mdb)};" + \r"C:\Users\PS24Sadhikari\python\GITHUB\DataBase\eccLABS.accdb")
+conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=eccLABS.accdb')
+cursor = conn.cursor()
+cursor.execute('select * from instructors')
+   
+for row in cursor.fetchall():
+    print(row)
