@@ -1,6 +1,12 @@
 import cv2
 import numpy
+import time
+from networktables import NetworkTables
 
+NetworkTables.initialize(server='roborio-TEAM-frc.local')  # Replace 'TEAM' with your team number
+
+# Get a reference to the 'SmartDashboard' table
+sd = NetworkTables.getTable('SmartDashboard')
 
 NoteWidthInches = 14
 NoteWidthMeters = NoteWidthInches * 0.0254
