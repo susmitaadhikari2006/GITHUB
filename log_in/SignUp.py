@@ -1,9 +1,11 @@
 import csv
+from argon2 import PasswordHasher
 
 invalidInput = False
 special_characters = "!@#$%^&*()-+?_=,<>/ ."
 Numbers = "1234567890"
 letters = "qwertyuiopasdfghjklzxcvbnm"
+ph = PasswordHasher()
 
 def checkPass(str):
     # if password contains a special character returns true
