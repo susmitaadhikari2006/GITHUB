@@ -1,17 +1,16 @@
 import csv
-from argon2 import PasswordHasher
+from pyargon2 import hash
 
 invalidInput = False
 special_characters = "!@#$%^&*()-+?_=,<>/ ."
 Numbers = "1234567890"
 letters = "qwertyuiopasdfghjklzxcvbnm"
-ph = PasswordHasher()
 
 def checkPass(str):
     # if password contains a special character returns true
     if (any(c in special_characters for c in str) and any(a in Numbers for a in str) and any(b in letters for b in str) and any(d in letters.upper() for d in str) and (len(str)>=8)):
         return True
-    else: 
+    else:
         return False
 #runs untill correct input is entered
 #assumes incorrect input at first
