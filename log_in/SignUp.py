@@ -1,11 +1,18 @@
 import csv
 from pyargon2 import hash
+import string
+import random
+def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
+    return ''.join(random.choice(chars) for _ in range(size))
 
+
+salt = id_generator()
+pepper = id_generator()
 invalidInput = False
 special_characters = "!@#$%^&*()-+?_=,<>/ ."
 Numbers = "1234567890"
 letters = "qwertyuiopasdfghjklzxcvbnm"
-
+print(id_generator())
 def checkPass(str):
     # if password contains a special character returns true
     if (any(c in special_characters for c in str) and any(a in Numbers for a in str) and any(b in letters for b in str) and any(d in letters.upper() for d in str) and (len(str)>=8)):
