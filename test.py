@@ -7,4 +7,4 @@ def id_generator(size=8, chars=string.ascii_uppercase + string.digits):
 salt = id_generator()
 pepper = id_generator()
 passowrd = "hello"
-print(hash(hash(passowrd, salt), salt))
+print(hash(hash(hash(passowrd, salt), salt), salt, pepper))

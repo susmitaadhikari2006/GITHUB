@@ -12,6 +12,8 @@ NoteWidthInches = 14
 NoteWidthMeters = NoteWidthInches * 0.0254
 focal_length = 930
 
+def getAngle():
+    print("")
 def draw_vertical_line(image):
     height, width, _ = image.shape
     # Calculate the coordinates for the middle of the screen
