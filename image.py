@@ -2,9 +2,10 @@ import cv2
 import numpy
 import time
 from networktables import NetworkTables
+from typing import List
 
 NetworkTables.initialize(server='roborio-TEAM-frc.local')  # Replace 'TEAM' with your team number
-
+infos = []
 # Get a reference to the 'SmartDashboard' table
 sd = NetworkTables.getTable('SmartDashboard')
 
@@ -30,7 +31,31 @@ def estimate_distance(object_width_pixels):
     # Returns: meters
     distance = (focal_length * NoteWidthMeters) / object_width_pixels
     return distance
+def calculate_angle(frame, object_x):
+    # Get the center of the image frame
+    height, width, _ = frame.shape
+    center_x = width // 2
 
+    # Calculate horizontal distance between object and center
+    distance_from_center = center_x - object_x
+
+    # Calculate angle using trigonometry
+    # Assuming the camera is directly facing the object
+    angle_radians = numpy.arctan(distance_from_center / focal_length)
+    angle_degrees = numpy.degrees(angle_radians)
+
+    # If the object_x value is less than the center of the image, set the 
+    # direction to "L" [left], otherwise the direction is right.
+    direction = "R"
+    if object_x < center_x:
+        direction = "L"
+
+    # By default, the angle is reversed from the direction of the image.
+    # Multiply this value by -1, so all items left of center have a negative angle value , 
+    # and all items right of the center have a postive angle value.
+    angle_degrees = round(angle_degrees * -1, 4)
+
+    return direction, angle_degrees
 while True:
     ret, frame = cam.read()
     width = int(cam.get(3))
@@ -47,7 +72,6 @@ while True:
     # Find contours in the mask
     contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     middle = draw_vertical_line(frame)#middle of the entire frame
-     
     # Draw bounding rectangles around detected orange items
     for contour in contours:
         x, y, w, h = cv2.boundingRect(contour)
@@ -61,9 +85,12 @@ while True:
             distance = estimate_distance(width)
             cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
             cv2.putText(frame, f'Width: {width}, Height: {height}, Area: {area}, {x}, new {position_ox}', (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
-
+            angle_data = calculate_angle(frame, position_ox)
             # Draw a circle at the centroid
             cv2.circle(frame, (x+int(w/2), y), 7, (255, 0, 0), -1)
+            info = distance + "," + angle_data[0] + "," + angle_data[1]
+            infos.append(info.split(","))
+            infos.sort()
     cv2.imshow('FRC Image Processing', frame)
 
     if cv2.waitKey(1) == ord('q'):
