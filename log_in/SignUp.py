@@ -13,7 +13,6 @@ special_characters = "!@#$%^&*()-+?_=,<>/ ."
 Numbers = "1234567890"
 letters = "qwertyuiopasdfghjklzxcvbnm"
 passwordhashed = ""
-print(id_generator())
 def checkPass(str):
     # if password contains a special character returns true
     if (any(c in special_characters for c in str) and any(a in Numbers for a in str) and any(b in letters for b in str) and any(d in letters.upper() for d in str) and (len(str)>=8)):

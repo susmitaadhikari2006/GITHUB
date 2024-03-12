@@ -1,7 +1,7 @@
 import json
 users = []
 passWrd =[]
-
+#DO NOT USE ANYMORE
 with open('users.json', 'r') as file:
     # Load JSON data from file
     data = json.load(file)
