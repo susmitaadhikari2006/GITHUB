@@ -9,11 +9,14 @@ special_characters = "!@#$%^&*()-+?_=,<>/ ." #String of Special Characters
 Numbers = "1234567890" #String of Numbers  
 letters = "qwertyuiopasdfghjklzxcvbnm" #String of letters
 indexForNewPass = 0 #setting the Index initially to 0
-rows = [] #this is the 2D array of information
+rows = [] #this is the 2D array of information (username,password,salt,pepper)
 usernames = [] #list for usernames
 passwords = [] #list of hashed Passwords
 salts = [] #list of salts used
 peppers = [] #list of peppers used
+userInfo = []
+UserUsername = []
+UserPassword = []
 
 
 """opening the CSV file and getting information"""
@@ -27,7 +30,16 @@ for h in rows:
     passwords.append(h[1])#making a list of passwords
     salts.append(h[2])#making a list of salts
     peppers.append(h[3])#Making a list of peppers
-    
+
+Userfile = open('user.csv')
+type(Userfile)
+csvreaderUser = csv.reader(Userfile)
+for row in csvreaderUser: #this is appending to the rows array form the csvFile
+    userInfo.append(row)#returns a 2d array of (username,password,salt,pepper)
+for h in rows:
+    UserUsername.append(h[0])#making a list of usernames
+    UserPassword.append(h[1])#making a list of passwords Unhashed
+
 """methods"""
 #method to check if the passed in password meets the requirements -> returns a boolean
 def checkPass(str):
@@ -80,10 +92,14 @@ while(signin):
                 rows[indexForNewPass][1] = hash(hash(hash(newPass, salt), salt), salt, pepper)
                 rows[indexForNewPass][2] = salt
                 rows[indexForNewPass][3] = pepper
+                userInfo[indexForNewPass][1] = newPass
                 #updating the new information the already exiting CSV file
                 with open('hashed.csv', 'w', newline='') as csvfile:
                     writer = csv.writer(csvfile)
                     writer.writerows(rows)
+                with open('user.csv', 'w', newline='') as csvfile:
+                    writer = csv.writer(csvfile)
+                    writer.writerows(userInfo)
         signin = True
     elif(change == "n"):
         signin = True
