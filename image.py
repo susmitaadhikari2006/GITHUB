@@ -4,11 +4,10 @@ import time
 from networktables import NetworkTables
 from typing import List
 
-NetworkTables.initialize(server='roborio-TEAM-frc.local')  # Replace 'TEAM' with your team number
+NetworkTables.initialize(server='roborio-4085-frc.local')  # Replace 'TEAM' with your team number
 infos = []
+sd = NetworkTables.getTable('imageTest')
 # Get a reference to the 'SmartDashboard' table
-sd = NetworkTables.getTable('SmartDashboard')
-
 NoteWidthInches = 14
 NoteWidthMeters = NoteWidthInches * 0.0254
 focal_length = 930
@@ -91,6 +90,7 @@ while True:
             info = distance + "," + angle_data[0] + "," + angle_data[1]
             infos.append(info.split(","))
             infos.sort()
+            sd.putNumberArray(infos)
     cv2.imshow('FRC Image Processing', frame)
 
     if cv2.waitKey(1) == ord('q'):
