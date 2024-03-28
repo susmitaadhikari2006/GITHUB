@@ -6,7 +6,7 @@ from typing import List
 
 NetworkTables.initialize(server='roborio-4085-frc.local')  # Replace 'TEAM' with your team number
 infos = []
-sd = NetworkTables.getTable('imageTest')
+sd = NetworkTables.getTable("imageTable")
 # Get a reference to the 'SmartDashboard' table
 NoteWidthInches = 14
 NoteWidthMeters = NoteWidthInches * 0.0254
