@@ -13,10 +13,11 @@ ntinst.setServerTeam(team)
 ntinst.startDSClient()
 infos = []
 sd = ntinst.getTable("imageTable")
+xsub = sd.getStringArrayTopic("notes").publish()
 # Get a reference to the 'SmartDashboard' table
 NoteWidthInches = 14
 NoteWidthMeters = NoteWidthInches * 0.0254
-focal_length = 930
+focal_length = (930/2) * 1.25
 
 def getAngle():
     print("")
@@ -61,6 +62,7 @@ def calculate_angle(frame, object_x):
     angle_degrees = round(angle_degrees * -1, 4)
 
     return direction, angle_degrees
+
 while True:
     ret, frame = cam.read()
     width = int(cam.get(3))
@@ -94,11 +96,34 @@ while True:
             angle_data = calculate_angle(frame, position_ox)
             # Draw a circle at the centroid
             cv2.circle(frame, (x+int(w/2), y), 7, (255, 0, 0), -1)
-            info = str(distance) + "," + str(angle_data[0]) + "," + str(angle_data[1])
-            infos.append(info.split(","))
-            infos.sort()
-            sd.putNumberArray(infos)
+            #info = str(round(distance*39.37,2)) + "," + str(angle_data[0]) + "," + str(angle_data[1])
+            #infos.append(info.split(","))
+            info = {
+                "distance": round(distance*39.37, 2), 
+                "direction": angle_data[0],
+                "angle": angle_data[1]
+            }
+            infos.append(info)
+    
+    if len(infos) > 0:        
+        infos = sorted(infos, key=lambda x: x["distance"])
+        print(infos)
+        info_arr = []
+        info_arr.append(str(infos[0]["distance"]))
+        info_arr.append(str(infos[0]["direction"]))
+        info_arr.append(str(infos[0]["angle"]))
+        xsub.set(info_arr)
+        info_str = str(infos[0]["distance"]) + ", " + str(infos[0]["direction"]) + ", " + str(infos[0]["angle"])
+        print(info_str)
+    infos = []
+    
+            
     #cv2.imshow('FRC Image Processing', frame)
+    
+    #if(len(infos) > 0):
+    #    xsub.set(infos[len(infos)-1])
+    #    print(infos[len(infos)-1])
+
 
     if cv2.waitKey(1) == ord('q'):
         break
