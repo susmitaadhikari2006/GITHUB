@@ -1,8 +1,9 @@
-# openCV Python Tutorials
+## openCV Python Tutorials
 https://www.youtube.com/watch?v=qCR2Weh64h4&list=PLzMcBGfZo4-lUA8uGjeXhBUUzPYc6vZRn
 
 This is the tutorial I used for this code
-information for the sign in project:
+
+## information for the sign in project:
 
 https://github.com/susmitaadhikari2006/GITHUB/blob/main/log_in/ChangePassword.py
 
@@ -21,6 +22,6 @@ https://github.com/susmitaadhikari2006/GITHUB/blob/main/log_in/ChangePassword.py
 + to start the project make sure you have Python 3.12.1 and you are in the correct repository
 run "python FileName.py" in the terminal
 
-# The flutter snap
+## The flutter snap
 + snapTest.dart used another function and imports in the main app while centering it
 
