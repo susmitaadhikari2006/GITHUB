@@ -14,42 +14,53 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
           backgroundColor: Colors.yellow,
           body: Center(
-             child: Stuff(),
-          )
-      ),
+            child: Stuff(),
+          )),
     );
   }
 }
 
-class Stuff extends StatelessWidget{
-  Widget build(BuildContext context){
+class Stuff extends StatelessWidget {
+  Widget build(BuildContext context) {
     return Column(
-            mainAxisAlignment:MainAxisAlignment.center,
-            children: <Widget>[
-              Image.network(
-                'https://codehs.com/uploads/c799accde67e1fd3bbd699119b4e1c83',
-                height: 90.0,
-                width: 90.0,
-              ),
-              ElevatedButton(
-                child: Text('LOG IN',
-                    style: TextStyle(color: Colors.white, fontSize: 20)),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red,
-                  elevation: 0,
-                ),
-                onPressed: () {},
-              ),
-              ElevatedButton(
-                child: Text("SIGN UP",
-                    style: TextStyle(color: Colors.white, fontSize: 20)),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blueAccent,
-                  elevation: 0,
-                ),
-                onPressed: () {},
-              ),
-            ],
-          );
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Expanded(
+          child: Center(
+            child: Image.network(
+              'https://codehs.com/uploads/c799accde67e1fd3bbd699119b4e1c83',
+              height: 90.0,
+              width: 90.0,
+            ),
+          ),
+        ),
+        Container(
+          height: 100,
+          color: Colors.red,
+          alignment: Alignment.center,
+          child: Text(
+            'Log In',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        Container(
+          height: 100,
+          color: Colors.blue,
+          alignment: Alignment.center,
+          child: Text(
+            'Sign In',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      ],
+    );
   }
 }
